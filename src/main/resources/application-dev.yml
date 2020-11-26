@@ -1,0 +1,11 @@
+spring:
+  main:
+    banner-mode: off
+  datasource:
+    url: jdbc:mysql://localhost:3333/overflow
+    username: root
+    password: Root@123
+    jpa:
+      hibernate:
+        ddl-auto: update
+      show-sql: true

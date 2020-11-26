@@ -1,0 +1,57 @@
+<!Doctype html>
+<html class="no-js" lang=""
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/layout :: layout(vCenter='no', currentPage='product-config')}"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>User View | Overflow</title>
+</head>
+<body>
+<!-- Add your, site or application content here -->
+<div class="control-banks" layout:fragment="content">
+    <div class="card mt-md-5 mt-3 box-shadow-1">
+        <div class="card-body" th:object="${userResponseDTO}">
+            <h5 class="mb-4 font-weight-bold">User Details</h5>
+
+            <div class="details-info">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="title">Full Name</p>
+                        <p th:text="*{name}"></p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <p class="title">Username</p>
+                        <p th:text="*{username}"></p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <p class="title">Email</p>
+                        <p th:text="*{email}"></p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <p class="title">Status</p>
+                        <p th:if="*{approved}" th:text="*{'Active'}"></p>
+                        <p th:if="*{!approved}" th:text="*{'Inactive'}"></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block layout:fragment="scripts">
+
+    <script type="text/javascript" th:src="@{/static/plugins/jquery-validation-1.19/jquery.validate.min.js}"></script>
+
+    <script type="text/javascript">
+
+    </script>
+</th:block>
+
+</body>
+</html>

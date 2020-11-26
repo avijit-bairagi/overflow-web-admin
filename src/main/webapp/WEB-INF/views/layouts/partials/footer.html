@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<footer class=" sm-position-relative clearfix" th:fragment="footer">
+    <div class="top">
+        <div class="container f-border position-relative">
+
+            <nav class="nav">
+                <a class="nav-link" th:href="'#'" target="_blank">Overflow</a>
+            </nav>
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 order-md-last">
+                    <ul>
+                        <li><a href="javascript:">Terms and Conditions</a></li>
+                        <li><a href="javascript:">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <p>Copyright © <span th:text="${#dates.year(#dates.createNow())}"></span>
+                        Overflow. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

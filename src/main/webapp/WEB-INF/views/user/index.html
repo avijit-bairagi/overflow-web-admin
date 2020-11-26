@@ -1,0 +1,207 @@
+<!Doctype html>
+<html class="no-js" lang=""
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/layout :: layout(vCenter='no', currentPage='user-config')}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>user | Saving DPS</title>
+</head>
+<body>
+<!-- Add your, site or application content here -->
+<div class="control-banks" layout:fragment="content">
+    <div class="card mt-md-5 mt-3 mb-4 box-shadow-1">
+        <div class="card-body">
+            <h5 class="mb-4">List View of users
+                <a th:href="@{/user/create}"
+                   class="btn main-btn float-right">Add user</a>
+            </h5>
+            <div class="table-responsive">
+                <table id="user" class="table table-bordered basic-table">
+                    <thead>
+                    <tr>
+                        <th scope="col" width="50px">SL</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email</th>
+                        <th th:if="${org.approvalNeeded}" scope="col">Approval Status</th>
+                        <th scope="col">Status</th>
+                        <th scope="col" class="text-center" width="470px">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user,index:${users}">
+                        <th th:text="${index.count}"></th>
+                        <td th:text="*{user.username}">username</td>
+                        <td th:text="*{user.email}">email</td>
+                        <td th:if="${org.approvalNeeded}">
+                            <span th:if="${user.approved}" class="text-success"> Approved</span>
+                            <span th:if="${!user.approved}" class="text-danger"> Not Approved</span>
+                        </td>
+
+                        <td>
+                            <span th:if="${user.active}" class="text-success"> Active</span>
+                            <span th:if="${!user.active}" class="text-danger"> Inactive</span>
+                        </td>
+
+                        <td class="text-center">
+                            <span th:if="${org.approvalNeeded}">
+                            <a type="button" class="btn cancel-btn" style="width:135px" th:if="${user.approved}"
+                               th:onclick="|openDisapproveModal('@{'/user/disapproved/' + ${user.id}}')|">Disapprove</a>
+                            <a type="button" class="btn cancel-btn" style="width:135px" th:if="${!user.approved}"
+                               th:onclick="|openApproveModal('@{'/user/approved/' + ${user.id}}')|">Approve</a>
+                            </span>
+                            <a type="button" class="btn cancel-btn" style="width:110px" th:if="${user.active}"
+                               th:onclick="|openInactiveModal('@{'/user/inactive/' + ${user.id}}')|">Inactive</a>
+                            <a type="button" class="btn cancel-btn" style="width:110px" th:if="${!user.active}"
+                               th:onclick="|openActiveModal('@{'/user/active/' + ${user.id}}')|">Active</a>
+
+                            <a th:href="@{'/user/view/' + ${user.id}}"
+                               class="btn main-btn ml-1">View</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Active Modal -->
+    <div class="modal fade" id="userApproveModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form th:action="'user' + '/approved/'"
+                      method="get">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">User Approved Confirmation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>
+                            Are you sure? <b class="userNameShow"></b> user will be Approved.
+                        </h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn cancel-btn" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn main-btn">Yes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="userActiveModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form th:action="'user' + '/active/'"
+                      method="get">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">User Active Confirmation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>
+                            Are you sure? <b class="userNameShow"></b> user will be Approved.
+                        </h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn cancel-btn" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn main-btn">Yes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inactive Modal -->
+    <div class="modal fade" id="userDisapproveModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form th:action="'user' + '/disapproved/'"
+                      method="get">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">user Disapproved Confirmation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>
+                            Are you sure? <b class="userNameShow"></b> user will be Disapproved.
+                        </h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn cancel-btn" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn main-btn">Yes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="userInactiveModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form th:action="'user' + '/inactive/'"
+                      method="get">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">User Inactive Confirmation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>
+                            Are you sure? <b class="userNameShow"></b> user will be Disapproved.
+                        </h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn cancel-btn" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn main-btn">Yes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<th:block layout:fragment="scripts">
+
+    <script type="text/javascript" th:src="@{/static/plugins/jquery-validation-1.19/jquery.validate.min.js}"></script>
+
+    <script type="text/javascript">
+
+
+        function openApproveModal(URL) {
+            $('#userApproveModal form').attr('action', URL);
+            $('#userApproveModal').modal('show');
+        }
+
+        function openDisapproveModal(URL) {
+            $('#userDisapproveModal form').attr('action', URL);
+            $('#userDisapproveModal').modal('show');
+        }
+
+        function openActiveModal(URL) {
+            $('#userActiveModal form').attr('action', URL);
+            $('#userActiveModal').modal('show');
+        }
+
+        function openInactiveModal(URL) {
+            $('#userInactiveModal form').attr('action', URL);
+            $('#userInactiveModal').modal('show');
+        }
+
+    </script>
+</th:block>
+</body>
+</html>

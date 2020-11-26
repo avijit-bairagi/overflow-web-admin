@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Home | Overflow</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="icon" th:href="@{/static/img/favicon.ico}" type="image/gif">
+
+    <!-- Place favicon.ico in the root directory -->
+    <script async type="text/javascript" th:src="@{/static/plugins/fontawesome-free-5.15/js/all.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/plugins/bootstrap-4.5/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/theme.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/style.css}">
+    <th:block layout:fragment="styles"></th:block>
+</head>
+<body th:fragment="layout(vCenter, currentPage)">
+
+<div th:replace='~{layouts/partials/header :: header(currentPage=${currentPage})}'></div>
+
+<div th:classappend="${vCenter}? 'verticalCenter'" class="body-container">
+    <!-- content Fluid -->
+    <div class="container-fluid">
+        <div layout:fragment="content-fluid"></div>
+    </div>
+
+    <!-- content -->
+    <div class="container">
+        <div layout:fragment="content"></div>
+    </div>
+
+    <!-- Loading Icon -->
+    <div class="pre-loader">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200px" height="200px"
+             viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+            <g transform="translate(50,50)">
+                <circle cx="0" cy="0" r="8.333333333333334" fill="none" stroke="#e15b64" stroke-width="4"
+                        stroke-dasharray="26.179938779914945 26.179938779914945" transform="rotate(332.253)">
+                    <animateTransform attributeName="transform" type="rotate" values="0 0 0;360 0 0" times="0;1"
+                                      dur="1s" calcMode="spline" keySplines="0.2 0 0.8 1" begin="0"
+                                      repeatCount="indefinite"></animateTransform>
+                </circle>
+                <circle cx="0" cy="0" r="16.666666666666668" fill="none" stroke="#f47e60" stroke-width="4"
+                        stroke-dasharray="52.35987755982989 52.35987755982989" transform="rotate(9.10296)">
+                    <animateTransform attributeName="transform" type="rotate" values="0 0 0;360 0 0" times="0;1"
+                                      dur="1s" calcMode="spline" keySplines="0.2 0 0.8 1" begin="-0.2"
+                                      repeatCount="indefinite"></animateTransform>
+                </circle>
+                <circle cx="0" cy="0" r="25" fill="none" stroke="#f8b26a" stroke-width="4"
+                        stroke-dasharray="78.53981633974483 78.53981633974483" transform="rotate(78.0181)">
+                    <animateTransform attributeName="transform" type="rotate" values="0 0 0;360 0 0" times="0;1"
+                                      dur="1s" calcMode="spline" keySplines="0.2 0 0.8 1" begin="-0.4"
+                                      repeatCount="indefinite"></animateTransform>
+                </circle>
+                <circle cx="0" cy="0" r="33.333333333333336" fill="none" stroke="#abbd81" stroke-width="4"
+                        stroke-dasharray="104.71975511965978 104.71975511965978" transform="rotate(165.17)">
+                    <animateTransform attributeName="transform" type="rotate" values="0 0 0;360 0 0" times="0;1"
+                                      dur="1s" calcMode="spline" keySplines="0.2 0 0.8 1" begin="-0.6"
+                                      repeatCount="indefinite"></animateTransform>
+                </circle>
+                <circle cx="0" cy="0" r="41.666666666666664" fill="none" stroke="#849b87" stroke-width="4"
+                        stroke-dasharray="130.89969389957471 130.89969389957471" transform="rotate(254.152)">
+                    <animateTransform attributeName="transform" type="rotate" values="0 0 0;360 0 0" times="0;1"
+                                      dur="1s" calcMode="spline" keySplines="0.2 0 0.8 1" begin="-0.8"
+                                      repeatCount="indefinite"></animateTransform>
+                </circle>
+            </g>
+        </svg>
+    </div>
+</div>
+
+<div th:replace="~{layouts/partials/footer :: footer}">&copy; 2016 The Static Templates</div>
+
+<script type="text/javascript" th:src="@{/static/js/jquery-3.5.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/plugins/popper-1.14.7/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/plugins/bootstrap-4.5/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/main.js}"></script>
+<th:block layout:fragment="scripts"></th:block>
+</body>
+</html>

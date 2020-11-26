@@ -1,0 +1,23 @@
+spring:
+  profiles:
+    active: dev
+  thymeleaf:
+    cache: false
+    enabled: false
+  jpa:
+    hibernate:
+      use-new-id-generator-mappings: false
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+    show-sql: true
+
+server:
+  error:
+    whitelabel:
+      enabled: false
+    include-stacktrace: always
+  port: 8088
+
+appName: overflow-admin-portal

@@ -1,0 +1,271 @@
+<!Doctype html>
+<html class="no-js" lang=""
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/layout :: layout(vCenter='false', currentPage='organization')}"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Organization Crate | Saving DPS</title>
+</head>
+<body>
+<div class="form-page" layout:fragment="content">
+    <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-11 col-lg-10">
+            <div class="card mt-4 mb-5 box-shadow-2">
+                <div class="card-body">
+
+                    <h3 class="text-center mb-sm-4">Organization Create</h3>
+                    <form th:object="${organizationRequestDTO}" id="organizationTemplateUpdate"
+                          th:action="@{'/organization/edit/'}" method="post">
+
+                        <div class="form-group">
+                            <label class="font-weight-bold">App Name*</label>
+                            <input type="text" class="form-control" name="appName" maxlength="255"
+                                   th:value="*{appName}">
+                            <div class="invalid-feedback d-block"
+                                 th:if="${#fields.hasErrors('appName')}"
+                                 th:errors="*{appName}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="font-weight-bold">Name (English) *</label>
+                            <input type="text" class="form-control" name="nameEn" maxlength="255"
+                                   th:value="*{nameEn}">
+                            <div class="invalid-feedback d-block"
+                                 th:if="${#fields.hasErrors('nameEn')}"
+                                 th:errors="*{nameEn}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="font-weight-bold">Name (Bangla) *</label>
+                            <input type="text" class="form-control" name="nameBn" maxlength="255"
+                                   th:value="*{nameBn}">
+                            <div class="invalid-feedback d-block"
+                                 th:if="${#fields.hasErrors('nameBn')}"
+                                 th:errors="*{nameBn}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="font-weight-bold">Organization Type *</label>
+
+                            <select th:field="*{type}" class="form-control" name="type">
+                                <option value="">Select type</option>
+                                <option
+                                        th:each="orgType : ${orgTypes}"
+                                        th:value="${orgType}"
+                                        th:text="${orgType}">
+                                </option>
+                            </select>
+
+                            <div class="invalid-feedback d-block"
+                                 th:if="${#fields.hasErrors('type')}"
+                                 th:errors="*{type}">
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label class="font-weight-bold">Logo *</label>
+                            <input type="text" class="form-control" name="logo" maxlength="255"
+                                   th:value="*{logo}">
+                            <div class="invalid-feedback d-block"
+                                 th:if="${#fields.hasErrors('logo')}"
+                                 th:errors="*{logo}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="font-weight-bold">Domain *</label>
+                            <input type="text" class="form-control" name="domain" maxlength="255"
+                                   th:value="*{domain}">
+                            <div class="invalid-feedback d-block"
+                                 th:if="${#fields.hasErrors('domain')}"
+                                 th:errors="*{domain}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="font-weight-bold">API EndPoint *</label>
+                            <input type="text" class="form-control" name="apiEndPoint" maxlength="255"
+                                   th:value="*{apiEndPoint}">
+                            <div class="invalid-feedback d-block"
+                                 th:if="${#fields.hasErrors('apiEndPoint')}"
+                                 th:errors="*{apiEndPoint}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="font-weight-bold">Email *</label>
+                            <input type="text" class="form-control" name="email" maxlength="255"
+                                   th:value="*{email}">
+                            <div class="invalid-feedback d-block"
+                                 th:if="${#fields.hasErrors('email')}"
+                                 th:errors="*{email}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="font-weight-bold">Phone *</label>
+                            <input type="text" class="form-control" name="phoneNo" maxlength="255"
+                                   th:value="*{phoneNo}">
+                            <div class="invalid-feedback d-block"
+                                 th:if="${#fields.hasErrors('phoneNo')}"
+                                 th:errors="*{phoneNo}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="font-weight-bold">Address Line *</label>
+                            <input type="text" class="form-control" name="addressLine" maxlength="255"
+                                   th:value="*{addressLine}">
+                            <div class="invalid-feedback d-block"
+                                 th:if="${#fields.hasErrors('addressLine')}"
+                                 th:errors="*{addressLine}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="font-weight-bold">City *</label>
+                            <input type="text" class="form-control" name="city" maxlength="255"
+                                   th:value="*{city}">
+                            <div class="invalid-feedback d-block"
+                                 th:if="${#fields.hasErrors('city')}"
+                                 th:errors="*{city}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Approval Type *</label> <br>
+                            <div class="radioBox" th:each="type:${approvalTypes}">
+                                <input type="radio" th:id="${type}" name="approvalType"
+                                       th:value="${type}"
+                                       th:field="*{approvalType}"/>
+                                <label th:for="${type}">
+                                    <span class="icon"></span>
+                                    <span class="text" th:text="${type}"></span>
+                                </label>
+                            </div>
+                            <div id="privacyTypeErrorPlace"></div>
+                            <div class="invalid-feedback d-block"
+                                 th:if="${#fields.hasErrors('approvalType')}"
+                                 th:errors="*{approvalType}">
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-4 text-right">
+                            <p class="mt-3 float-left"><small class="text-danger">* Required field</small></p>
+                            <a class="btn cancel-btn" href="javascript:"
+                               data-toggle="modal" data-target="#backModal">Cancel</a>
+                            <input type="button" id="createBtn" class="btn main-btn" value="Save">
+                        </div>
+
+                        <!-- Submit Modal -->
+                        <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Organization - Update</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure to proceed? Organization will be updated.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn cancel-btn" data-dismiss="modal">No</button>
+                                        <button type="submit" class="btn main-btn">Yes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+            <!-- Back Modal -->
+            <div class="modal fade" id="backModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure? Any unsaved work will be lost.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn cancel-btn" data-dismiss="modal">No</button>
+                            <a th:href="@{/organization}"
+                               onclick="removeAlert()"
+                               class="btn main-btn">Yes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<th:block layout:fragment="scripts">
+    <script type="text/javascript" th:src="@{/static/plugins/jquery-validation-1.19/jquery.validate.min.js}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#organizationTemplateUpdate").validate({
+                rules: {
+                    organizationCode: {
+                        required: true,
+                    },
+                    nameBn: {
+                        required: true,
+                    },
+                    nameEn: {
+                        required: true,
+                    },
+                    logo: {
+                        required: true,
+                    },
+                    merchantWalletNo: {
+                        required: true,
+                        digits: true
+                    },
+                    organisationOperator: {
+                        required: true,
+                    },
+                },
+            });
+            $("#createBtn").click(function () {
+                let FormValid = $("#organizationTemplateUpdate").valid();
+                if (FormValid) {
+                    $('#submitModal').modal('show')
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript" th:inline="javascript">
+
+        window.onbeforeunload = function () {
+            // Custom message will not show
+            return 'Are you sure? Any unsaved work will be lost.';
+        };
+        $(document).on("submit", "form", function () {
+            removeAlert();
+        });
+
+        function removeAlert() {
+            window.onbeforeunload = null;
+        }
+    </script>
+</th:block>
+
+</body>
+</html>

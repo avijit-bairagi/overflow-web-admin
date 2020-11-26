@@ -1,0 +1,81 @@
+<!Doctype html>
+<html class="no-js" lang=""
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/layout :: layout(vCenter='no', currentPage='product-config')}"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Organization View | Overflow</title>
+</head>
+<body>
+<!-- Add your, site or application content here -->
+<div class="control-banks" layout:fragment="content">
+    <div class="card mt-md-5 mt-3 box-shadow-1">
+        <div class="card-body" th:object="${organization}">
+
+            <h5 class="mb-4">Organization Details
+                <a th:if="${organization != null}" th:href="@{/organization/edit}" class="btn main-btn float-right">Edit Organization</a>
+                <a th:if="${organization == null}" th:href="@{/organization/create}" class="btn main-btn float-right">Add Organization</a>
+            </h5>
+
+            <div th:if="${organization != null}" class="details-info">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="title">Name</p>
+                        <p th:text="*{nameEn}"></p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <p class="title">Name (Bangla)</p>
+                        <p th:text="*{nameBn}"></p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <p class="title">Domain</p>
+                        <p th:text="*{domain}"></p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <p class="title">Type</p>
+                        <p th:text="*{type}"></p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <p class="title">Email</p>
+                        <p th:text="*{email}"></p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <p class="title">Phone</p>
+                        <p th:text="*{phoneNo}"></p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <p class="title">Address</p>
+                        <p th:text="*{addressLine} + ' ,' + *{city}"></p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <p class="title">Approval Status</p>
+                        <p th:if="*{approvalNeeded}" th:text="*{'Need'}"></p>
+                        <p th:if="*{!approvalNeeded}" th:text="*{'Not need'}"></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block layout:fragment="scripts">
+
+    <script type="text/javascript" th:src="@{/static/plugins/jquery-validation-1.19/jquery.validate.min.js}"></script>
+
+    <script type="text/javascript">
+
+    </script>
+</th:block>
+
+</body>
+</html>
